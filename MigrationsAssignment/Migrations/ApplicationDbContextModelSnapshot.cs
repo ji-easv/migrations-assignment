@@ -77,8 +77,8 @@ namespace MigrationsAssignment.Migrations
                     b.Property<Guid>("CourseId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("FinalGrade")
-                        .HasColumnType("INTEGER");
+                    b.Property<double?>("FinalGrade")
+                        .HasColumnType("REAL");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
