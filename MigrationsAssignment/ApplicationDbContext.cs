@@ -8,6 +8,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Course> Courses { get; set; }
     public DbSet<Enrollment> Enrollments { get; set; }
     public DbSet<Student> Students { get; set; }
+    public DbSet<Instructor> Instructors { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
@@ -25,7 +26,11 @@ public class ApplicationDbContext : DbContext
             .HasOne(e=>e.Course)
             .WithMany()
             .HasForeignKey(e=>e.CourseId);
-        
+        modelBuilder.Entity<Course>()
+            .HasOne(e=>e.Instructor)
+            .WithMany()
+            .HasForeignKey(e=>e.InstructorId);
+  
         base.OnModelCreating(modelBuilder);
     }
 }
