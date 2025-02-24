@@ -9,6 +9,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Enrollment> Enrollments { get; set; }
     public DbSet<Student> Students { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
+    public DbSet<Department> Departments { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
@@ -30,7 +31,11 @@ public class ApplicationDbContext : DbContext
             .HasOne(e=>e.Instructor)
             .WithMany()
             .HasForeignKey(e=>e.InstructorId);
-  
+        modelBuilder.Entity<Department>()
+            .HasOne(e=>e.DepartmentHead)
+            .WithOne()
+            .HasForeignKey<Department>(e=>e.DepartmentHeadId);
+        
         base.OnModelCreating(modelBuilder);
     }
 }

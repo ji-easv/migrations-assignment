@@ -37,7 +37,7 @@ namespace MigrationsAssignment.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Enrollment", b =>
@@ -61,7 +61,7 @@ namespace MigrationsAssignment.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Enrollments");
+                    b.ToTable("Enrollments", (string)null);
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Instructor", b =>
@@ -90,16 +90,13 @@ namespace MigrationsAssignment.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructor");
+                    b.ToTable("Instructor", (string)null);
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Student", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTimeOffset>("Birthday")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -117,12 +114,9 @@ namespace MigrationsAssignment.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Course", b =>
