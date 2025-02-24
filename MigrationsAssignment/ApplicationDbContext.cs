@@ -10,11 +10,12 @@ public class ApplicationDbContext : DbContext
     public DbSet<Student> Students { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
     public DbSet<Department> Departments { get; set; }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
-        optionsBuilder.UseSqlite($"Data Source={path}/student-management.db");
+        optionsBuilder.UseSqlite($"Data Source={path}/student-management.sqlite");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,14 +24,17 @@ public class ApplicationDbContext : DbContext
             .HasOne(e=>e.Student)
             .WithMany()
             .HasForeignKey(e=>e.StudentId);
+        
         modelBuilder.Entity<Enrollment>()
             .HasOne(e=>e.Course)
             .WithMany()
             .HasForeignKey(e=>e.CourseId);
+        
         modelBuilder.Entity<Course>()
             .HasOne(e=>e.Instructor)
             .WithMany()
             .HasForeignKey(e=>e.InstructorId);
+        
         modelBuilder.Entity<Department>()
             .HasOne(e=>e.DepartmentHead)
             .WithOne()

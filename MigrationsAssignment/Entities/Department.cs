@@ -8,5 +8,4 @@ public class Department
     public DateTimeOffset StartDate { get; set; }
     public Guid DepartmentHeadId { get; set; }
     public Instructor? DepartmentHead { get; set; }
-
 }
