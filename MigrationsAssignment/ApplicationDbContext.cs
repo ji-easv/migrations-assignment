@@ -25,7 +25,11 @@ public class ApplicationDbContext : DbContext
             .HasOne(e=>e.Course)
             .WithMany()
             .HasForeignKey(e=>e.CourseId);
-        
+        modelBuilder.Entity<Course>()
+            .HasOne(e=>e.Instructor)
+            .WithMany()
+            .HasForeignKey(e=>e.InstructorId);
+  
         base.OnModelCreating(modelBuilder);
     }
 }
