@@ -18,13 +18,13 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Enrollment>()
-            .HasOne(E=>E.Student)
+            .HasOne(e=>e.Student)
             .WithMany()
-            .HasForeignKey(E=>E.StudentId);
+            .HasForeignKey(e=>e.StudentId);
         modelBuilder.Entity<Enrollment>()
-            .HasOne(E=>E.Course)
+            .HasOne(e=>e.Course)
             .WithMany()
-            .HasForeignKey(E=>E.CourseId);
+            .HasForeignKey(e=>e.CourseId);
         
         base.OnModelCreating(modelBuilder);
     }
