@@ -9,7 +9,5 @@ public class Enrollment
     public Student? Student { get; set; }
     public Guid CourseId { get; set; }
     public Course? Course { get; set; }
-    public int? FinalGrade { get; set; }
-    [NotMapped]
-    public int? Grade { get=>FinalGrade; set=>FinalGrade=value; }
+    public double? FinalGrade { get; set; }
 }
