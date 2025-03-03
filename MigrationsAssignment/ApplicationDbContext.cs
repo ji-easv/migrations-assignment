@@ -13,9 +13,7 @@ public class ApplicationDbContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        optionsBuilder.UseSqlite($"Data Source={path}/student-management.sqlite");
+        optionsBuilder.UseSqlite($"Data Source=student-management.sqlite");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
