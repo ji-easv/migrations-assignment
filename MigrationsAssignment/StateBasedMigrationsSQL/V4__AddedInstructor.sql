@@ -18,7 +18,7 @@ create table Courses
     Credits      INTEGER not null,
     InstructorId TEXT    not null
         constraint FK_Courses_Instructors_InstructorId
-            references Instructors
+            references Instructors(Id)
             on delete cascade,
     Title        TEXT    not null
 );
@@ -46,12 +46,12 @@ create table Enrollments
             primary key,
     CourseId  TEXT not null
         constraint FK_Enrollments_Courses_CourseId
-            references Courses
+            references Courses(Id)
             on delete cascade,
     Grade     INTEGER,
     StudentId TEXT not null
         constraint FK_Enrollments_Students_StudentId
-            references Students
+            references Students(Id)
             on delete cascade
 );
 

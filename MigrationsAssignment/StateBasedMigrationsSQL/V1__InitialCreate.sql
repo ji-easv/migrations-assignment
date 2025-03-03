@@ -25,12 +25,12 @@ create table Enrollments
             primary key,
     CourseId  TEXT not null
         constraint FK_Enrollments_Courses_CourseId
-            references Courses
+            references Courses(Id)
             on delete cascade,
     Grade     INTEGER,
     StudentId TEXT not null
         constraint FK_Enrollments_Students_StudentId
-            references Students
+            references Students(Id)
             on delete cascade
 );
 
