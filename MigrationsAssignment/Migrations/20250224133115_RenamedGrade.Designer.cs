@@ -11,8 +11,8 @@ using MigrationsAssignment;
 namespace MigrationsAssignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250224120819_AddedInstructors")]
-    partial class AddedInstructors
+    [Migration("20250224133115_RenamedGrade")]
+    partial class RenamedGrade
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace MigrationsAssignment.Migrations
                     b.Property<Guid>("CourseId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Grade")
+                    b.Property<int?>("FinalGrade")
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid>("StudentId")
@@ -93,13 +93,16 @@ namespace MigrationsAssignment.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructor");
+                    b.ToTable("Instructors");
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Student", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("Birthday")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -115,6 +118,9 @@ namespace MigrationsAssignment.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MiddleName")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

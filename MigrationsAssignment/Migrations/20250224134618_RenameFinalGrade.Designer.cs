@@ -11,8 +11,8 @@ using MigrationsAssignment;
 namespace MigrationsAssignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250224122323_RenamedGrade")]
-    partial class RenamedGrade
+    [Migration("20250224134618_RenameFinalGrade")]
+    partial class RenameFinalGrade
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,13 +29,46 @@ namespace MigrationsAssignment.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid>("InstructorId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("InstructorId");
+
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("MigrationsAssignment.Entities.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Budget")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("DepartmentHeadId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("StartDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentHeadId")
+                        .IsUnique();
+
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Enrollment", b =>
@@ -47,8 +80,8 @@ namespace MigrationsAssignment.Migrations
                     b.Property<Guid>("CourseId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("FinalGrade")
-                        .HasColumnType("INTEGER");
+                    b.Property<double?>("FinalGrade")
+                        .HasColumnType("REAL");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
@@ -60,6 +93,35 @@ namespace MigrationsAssignment.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("MigrationsAssignment.Entities.Instructor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("HireDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Instructors");
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Student", b =>
@@ -92,6 +154,28 @@ namespace MigrationsAssignment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("MigrationsAssignment.Entities.Course", b =>
+                {
+                    b.HasOne("MigrationsAssignment.Entities.Instructor", "Instructor")
+                        .WithMany()
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Instructor");
+                });
+
+            modelBuilder.Entity("MigrationsAssignment.Entities.Department", b =>
+                {
+                    b.HasOne("MigrationsAssignment.Entities.Instructor", "DepartmentHead")
+                        .WithOne()
+                        .HasForeignKey("MigrationsAssignment.Entities.Department", "DepartmentHeadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DepartmentHead");
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Enrollment", b =>

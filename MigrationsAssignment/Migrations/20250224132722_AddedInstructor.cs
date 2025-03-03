@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MigrationsAssignment.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedInstructors : Migration
+    public partial class AddedInstructor : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace MigrationsAssignment.Migrations
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.CreateTable(
-                name: "Instructor",
+                name: "Instructors",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
@@ -31,7 +31,7 @@ namespace MigrationsAssignment.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instructor", x => x.Id);
+                    table.PrimaryKey("PK_Instructors", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
@@ -40,10 +40,10 @@ namespace MigrationsAssignment.Migrations
                 column: "InstructorId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Courses_Instructor_InstructorId",
+                name: "FK_Courses_Instructors_InstructorId",
                 table: "Courses",
                 column: "InstructorId",
-                principalTable: "Instructor",
+                principalTable: "Instructors",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -52,11 +52,11 @@ namespace MigrationsAssignment.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Courses_Instructor_InstructorId",
+                name: "FK_Courses_Instructors_InstructorId",
                 table: "Courses");
 
             migrationBuilder.DropTable(
-                name: "Instructor");
+                name: "Instructors");
 
             migrationBuilder.DropIndex(
                 name: "IX_Courses_InstructorId",

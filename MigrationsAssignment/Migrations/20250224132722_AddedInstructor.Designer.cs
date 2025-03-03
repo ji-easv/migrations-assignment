@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MigrationsAssignment;
 
@@ -10,9 +11,11 @@ using MigrationsAssignment;
 namespace MigrationsAssignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250224132722_AddedInstructor")]
+    partial class AddedInstructor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
@@ -40,34 +43,6 @@ namespace MigrationsAssignment.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("MigrationsAssignment.Entities.Department", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Budget")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("DepartmentHeadId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTimeOffset>("StartDate")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentHeadId")
-                        .IsUnique();
-
-                    b.ToTable("Departments");
-                });
-
             modelBuilder.Entity("MigrationsAssignment.Entities.Enrollment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -77,8 +52,8 @@ namespace MigrationsAssignment.Migrations
                     b.Property<Guid>("CourseId")
                         .HasColumnType("TEXT");
 
-                    b.Property<double?>("FinalGrade")
-                        .HasColumnType("REAL");
+                    b.Property<int?>("Grade")
+                        .HasColumnType("INTEGER");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
@@ -162,17 +137,6 @@ namespace MigrationsAssignment.Migrations
                         .IsRequired();
 
                     b.Navigation("Instructor");
-                });
-
-            modelBuilder.Entity("MigrationsAssignment.Entities.Department", b =>
-                {
-                    b.HasOne("MigrationsAssignment.Entities.Instructor", "DepartmentHead")
-                        .WithOne()
-                        .HasForeignKey("MigrationsAssignment.Entities.Department", "DepartmentHeadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DepartmentHead");
                 });
 
             modelBuilder.Entity("MigrationsAssignment.Entities.Enrollment", b =>
