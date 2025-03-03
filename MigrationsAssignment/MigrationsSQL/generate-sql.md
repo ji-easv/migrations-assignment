@@ -26,10 +26,12 @@ dotnet ef migrations script AddedInstructors RenamedGrade -o MigrationsSQL/V6__R
 
 ## Task 6
 ```bash
-dotnet ef migrations script RenamedGrade ??? -o MigrationsSQL/V7__.sql
+dotnet ef migrations script RenamedGrade AddDepartments -o MigrationsSQL/V7__AddDepartments.sql
 ```
 
-## Task 6
+## Task 7
 ```bash
-dotnet ef migrations script ??? ??? -o MigrationsSQL/V8__.sql
+dotnet ef migrations script AddDepartments AddFinalGradeDouble -o MigrationsSQL/V8__AddFinalGradeDouble.sql
+dotnet ef migrations script AddFinalGradeDouble DropFinalGradeInt -o MigrationsSQL/V9__DropFinalGradeInt.sql
+dotnet ef migrations script DropFinalGradeInt RenameFinalGrade -o MigrationsSQL/V10__RenameFinalGrade.sql
 ```
