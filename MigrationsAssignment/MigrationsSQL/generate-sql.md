@@ -16,12 +16,12 @@ dotnet ef migrations script AddedMiddleNameToStudent AddedBirthdayToStudent -o M
 
 ## Task 4
 ```bash
-dotnet ef migrations script AddedBirthdayToStudent AddedInstructors -o MigrationsSQL/V5__AddedInstructors.sql
+dotnet ef migrations script AddedBirthdayToStudent AddedInstructor -o MigrationsSQL/V5__AddedInstructors.sql
 ```
 
 ## Task 5
 ```bash
-dotnet ef migrations script AddedInstructors RenamedGrade -o MigrationsSQL/V6__RenamedGrade.sql
+dotnet ef migrations script AddedInstructor RenamedGrade -o MigrationsSQL/V6__RenamedGrade.sql
 ```
 
 ## Task 6

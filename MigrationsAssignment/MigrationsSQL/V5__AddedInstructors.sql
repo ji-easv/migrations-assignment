@@ -1,8 +1,8 @@
 ﻿BEGIN TRANSACTION;
 ALTER TABLE "Courses" ADD "InstructorId" TEXT NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000';
 
-CREATE TABLE "Instructor" (
-    "Id" TEXT NOT NULL CONSTRAINT "PK_Instructor" PRIMARY KEY,
+CREATE TABLE "Instructors" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_Instructors" PRIMARY KEY,
     "FirstName" TEXT NOT NULL,
     "MiddleName" TEXT NULL,
     "LastName" TEXT NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE "ef_temp_Courses" (
     "Credits" INTEGER NOT NULL,
     "InstructorId" TEXT NOT NULL,
     "Title" TEXT NOT NULL,
-    CONSTRAINT "FK_Courses_Instructor_InstructorId" FOREIGN KEY ("InstructorId") REFERENCES "Instructor" ("Id") ON DELETE CASCADE
+    CONSTRAINT "FK_Courses_Instructors_InstructorId" FOREIGN KEY ("InstructorId") REFERENCES "Instructors" ("Id") ON DELETE CASCADE
 );
 
 INSERT INTO "ef_temp_Courses" ("Id", "Credits", "InstructorId", "Title")
@@ -43,5 +43,5 @@ CREATE INDEX "IX_Courses_InstructorId" ON "Courses" ("InstructorId");
 COMMIT;
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20250224120819_AddedInstructors', '9.0.2');
+VALUES ('20250224132722_AddedInstructor', '9.0.2');
 
