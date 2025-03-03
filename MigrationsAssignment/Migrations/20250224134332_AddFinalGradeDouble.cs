@@ -22,6 +22,8 @@ namespace MigrationsAssignment.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.Sql("UPDATE Enrollments SET FinalGrade = CAST(FinalGradeDouble AS INTEGER)");
+            
             migrationBuilder.DropColumn(
                 name: "FinalGradeDouble",
                 table: "Enrollments");
